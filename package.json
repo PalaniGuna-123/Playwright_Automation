@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "cucumber-js test"
-  },
+ "scripts": {
+  "test": "cucumber-js --require e2e-tests/steps --require e2e-tests/support"
+},
+
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -16,3 +17,4 @@
     "prettier": "^3.5.3"
   }
 }
+

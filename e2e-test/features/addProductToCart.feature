@@ -7,3 +7,6 @@ Feature: Search for a product and add it to the cart
     And the user adds the first product to the cart
     Then the product is successfully added to the cart
     When the user proceeds to checkout
+    Then the user fills out the fields in the shipping form
+    And the user select the flat rate shipping method
+    And the user proceeds to the payment step
