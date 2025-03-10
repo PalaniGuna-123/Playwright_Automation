@@ -1,26 +1,14 @@
 const {Given, When, Then} = require('@cucumber/cucumber');
 const {expect} = require('@playwright/test');
-const SearchPage = require('../../pageObjects/SearchPage');
-const ProductListingPage = require('../../pageObjects/ProductListingPage');
-const ProductDetailsPage = require('../../pageObjects/ProductDetailsPage');
-const CheckoutPage = require('../../pageObjects/CheckoutPage');
+const SearchPage=require('../../Ecom-POM/searchpage')
+const ProductListingPage = require("../Ecom-POM/productlistingpage");
+const ProductDetailsPage = require("../Ecom-POM/ProductDetailsPage");
+const CheckoutPage = require('../../Ecom-POM/CheckoutPage');
 
-const SHIPPING_FORM_SELECTORS = {
-    email: '#customer-email',
-    firstName: 'input[name="firstname"]',
-    lastName: 'input[name="lastname"]',
-    company: 'input[name="company"]',
-    street: 'input[name="street[0]"]',
-    country: 'select[name="country_id"]',
-    region: 'select[name="region_id"]',
-    city: 'input[name="city"]',
-    postCode: 'input[name="postcode"]',
-    telephone: 'input[name="telephone"]',
-};
 
 Given('the user navigates to the website', async function () {
-    await this.openBrowser();
-    await this.navigateTo(this.baseURL);
+    const currentUrl = await this.page.url();
+    expect(currentUrl).toBe(this.baseURL);
 });
 
 When('the user searches for a product with the term {string}', async function (searchTerm) {
@@ -43,3 +31,10 @@ Then('the product is successfully added to the cart', async function () {
     const cartItem = await productDetailsPage.verifyProductInCart();
     expect(cartItem).not.toBeNull();
 });
+
+When('the user proceeds to checkout', async function () {
+    const checkoutPage = new CheckoutPage(this.page);
+    await checkoutPage.proceedToCheckout();
+});
+
+
