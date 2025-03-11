@@ -23,6 +23,8 @@ test("search for a product and add to cart", async function ({ page }) {
     await checkoutPage.fillShippingForm()
     await checkoutPage.selectFlatRateShippingMethod()
     await checkoutPage.proceedToPaymentStep()
+    await checkoutPage.placeOrder()
+    await checkoutPage.isCheckoutSuccess()
 
     // const cartItem = await productdetailspage.verifyProductCart();
     // expect(cartItem).not.toBeNull();
