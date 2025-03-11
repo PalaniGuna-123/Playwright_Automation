@@ -4,6 +4,7 @@ import SearchPage from "../Ecom-POM/searchpage";
 import ProductListingPage from "../Ecom-POM/productlistingpage";
 import ProductDetailsPage from "../Ecom-POM/ProductDetailsPage";
 import CheckoutPage from "../Ecom-POM/CheckoutPage";
+import createAccountPage from "../Ecom-POM/createAccount";
 
 const SEARCH_TERM = "bag";
 
@@ -13,6 +14,7 @@ test("search for a product and add to cart", async function ({ page }) {
     const productlistingpage = new ProductListingPage(page);
     const productdetailspage = new ProductDetailsPage(page);
     const checkoutPage = new CheckoutPage(page);
+    const createAccountpage=new createAccountPage(page)
 
     await homePage.navigatetoWeb();
     await searchPage.searchProduct(SEARCH_TERM);
@@ -25,6 +27,8 @@ test("search for a product and add to cart", async function ({ page }) {
     await checkoutPage.proceedToPaymentStep()
     await checkoutPage.placeOrder()
     await checkoutPage.isCheckoutSuccess()
+    await createAccountpage.go_to_create_account()
+    await createAccountpage.fill_create_account_form()
 
     // const cartItem = await productdetailspage.verifyProductCart();
     // expect(cartItem).not.toBeNull();
