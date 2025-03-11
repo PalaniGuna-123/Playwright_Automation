@@ -1,7 +1,7 @@
 class ProductListingPage {
     constructor(page) {
         this.page = page;
-        this.FIRST_PRODUCT_SELECTOR = '.product-item:first-of-type';
+        this.FIRST_PRODUCT_SELECTOR = '//img[@alt="Voyage Yoga Bag"]';
     }
 
     async selectFirstProduct() {

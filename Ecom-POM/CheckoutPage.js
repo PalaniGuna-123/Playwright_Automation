@@ -1,11 +1,12 @@
 class CheckoutPage {
     constructor(page) {
         this.page = page;
-        this.PROCEED_TO_CHECKOUT_BUTTON = '#top-cart-btn-checkout';
+        this.PROCEED_TO_CHECKOUT_BUTTON = "//span[@class='counter-number']";
+        this.PROCEED="//button[@id='top-cart-btn-checkout']"
         this.FLAT_RATE_SHIPPING_METHOD = '#label_method_flatrate_flatrate';
         this.GO_TO_NEXT_STEP_BUTTON = '.button.action.continue.primary';
         this.SHIPPING_FORM_SELECTOR = {
-            email: '#customer-email',
+            email: "//div[@class='control _with-tooltip']//input[@id='customer-email']",
             firstName: 'input[name="firstname"]',
             lastName: 'input[name="lastname"]',
             company: 'input[name="company"]',
@@ -17,15 +18,17 @@ class CheckoutPage {
             telephone: 'input[name="telephone"]'
         };
     }
-
+    async proceed(){
+        await this.page.click(this.PROCEED)
+    }
     async proceedToCheckout() {
         await this.page.click(this.PROCEED_TO_CHECKOUT_BUTTON);
     }
 
     async fillShippingForm() {
-        await this.page.fill(this.SHIPPING_FORM_SELECTOR.email, "adamvarga.one.dev@gmail.com");
-        await this.page.fill(this.SHIPPING_FORM_SELECTOR.firstName, "Adam");
-        await this.page.fill(this.SHIPPING_FORM_SELECTOR.lastName, "Varga");
+        await this.page.fill(this.SHIPPING_FORM_SELECTOR.email, "guna.dev@gmail.com");
+        await this.page.fill(this.SHIPPING_FORM_SELECTOR.firstName, "Guna");
+        await this.page.fill(this.SHIPPING_FORM_SELECTOR.lastName, "Vision");
         await this.page.fill(this.SHIPPING_FORM_SELECTOR.company, "Any Company");
         await this.page.fill(this.SHIPPING_FORM_SELECTOR.street, "1234 Elm St");
         await this.page.locator(this.SHIPPING_FORM_SELECTOR.country).selectOption({index: 1});
