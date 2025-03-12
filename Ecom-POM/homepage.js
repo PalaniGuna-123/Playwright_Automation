@@ -4,7 +4,7 @@ class HomePage{
     }
     async navigatetoWeb(){
        await this.page.goto('/')
-      //  await this.page.setViewportSize({ width: 1800, height: 1080 });
+       await this.page.setViewportSize({ width: 1800, height: 1080 });
 
     }
    }

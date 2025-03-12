@@ -12,6 +12,9 @@ import ShoppingOptions from "../Ecom-POM/jacketsShoppingOptions";
 import navigateWomenProducts from "../Ecom-POM/navigateWomenProducts"
 import WomenPage from "../Ecom-POM/navigateWomenProducts";
 import JacketPage from "../Ecom-POM/JacketPageDropdown";
+import CartPage from "../Ecom-POM/addCart";
+import ScrollControl from "../Ecom-POM/scrollControl";
+import ReviewPage from "../Ecom-POM/reviewPage";
 
 
 const SEARCH_TERM = "bag";
@@ -47,6 +50,14 @@ test.only("search for a product and add to cart", async function ({ page }) {
     const jacketPage = new JacketPage(page);
     await jacketPage.selectOptionFromDropdown()
 
+    const cartpage=new CartPage(page)
+    await cartpage.addAllItemsToCart()
+    const scroll =new ScrollControl(page)
+    const review=new ReviewPage(page)
+    await scroll.scrollBy1000px()
+    await review.reviewDetails()
+    await review.fillreviewform()
+
 
 
 });
@@ -81,13 +92,17 @@ test("hovering this products",async function ({page}){
 
 test("add to cart women products", async function ({page}){
     const homePage = new HomePage(page);
+    const scroll =new ScrollControl(page)
+    const review=new ReviewPage(page)
     await homePage.navigatetoWeb();
     const navigateWomen=new WomenPage(page)
     await navigateWomen.goToJacketsPage()
     const jacketPage = new JacketPage(page);
     await jacketPage.selectOptionFromDropdown()
-
-
-
+    const cartpage=new CartPage(page)
+    await cartpage.addAllItemsToCart()
+    await scroll.scrollBy1000px()
+    await review.reviewDetails()
+    await review.fillreviewform()
   
 })

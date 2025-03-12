@@ -1,0 +1,13 @@
+{
+  "shippingData": {
+    "email": "adamvarga.one.dev@gmail.com",
+    "firstName": "Adam",
+    "lastName": "Varga",
+    "company": "Any Company",
+    "street": "1234 Elm St",
+    "countryIndex": 1,
+    "city": "Springfield",
+    "postCode": "12345",
+    "telephone": "123-456-789"
+  }
+}
