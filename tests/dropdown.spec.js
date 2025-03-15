@@ -30,7 +30,7 @@ test ("My dropdown test", async ({page})=>{
     
 })
 
-test.skipgit ("multi select dropdown", async ({page})=>{
+test.skip ("multi select dropdown", async ({page})=>{
     await page.goto("https://demoqa.com/select-menu")
 
     await page.locator("//div[contains(@class,'css-1pahdxg-control')]//div[contains(@class,'css-1hwfws3')]").selectOption('Green','Blue')
