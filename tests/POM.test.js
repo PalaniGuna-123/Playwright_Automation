@@ -21,6 +21,7 @@ const SEARCH_TERM = "bag";
 
 test.only("search for a product and add to cart", async function ({ page }) {
     const homePage = new HomePage(page);
+    await page.pause();
     const searchPage = new SearchPage(page);
     const productlistingpage = new ProductListingPage(page);
     const productdetailspage = new ProductDetailsPage(page);
