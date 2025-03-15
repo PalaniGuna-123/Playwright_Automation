@@ -41,9 +41,18 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'Google Chrome',
+      use: { 
+        ...devices['Desktop Chrome'], 
+        channel: 'chrome' // Run tests in system-installed Chrome
+      },
     },
+  
+  // projects: [
+  //   {
+  //     name: 'chromium',
+  //     use: { ...devices['Desktop Chrome'] },
+  //   },
 
     // {
     //   name: 'firefox',
@@ -84,3 +93,26 @@ export default defineConfig({
   // },
 });
 
+
+// module.exports = defineConfig({
+//   testDir: './tests',
+//   fullyParallel: true,
+//   forbidOnly: !!process.env.CI,
+//   retries: process.env.CI ? 2 : 0,
+//   workers: process.env.CI ? 1 : undefined,
+//   reporter: 'html',
+  
+//   use: {
+//     trace: 'on-first-retry',
+//   },
+
+//   projects: [
+//     {
+//       name: 'Google Chrome',
+//       use: { 
+//         ...devices['Desktop Chrome'], 
+//         channel: 'chrome' // Run tests in system-installed Chrome
+//       },
+//     },
+//   ],
+// });
