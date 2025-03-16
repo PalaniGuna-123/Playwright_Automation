@@ -1,0 +1,73 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Search for a product and add to cart
+- Location: C:\Playwright_Automation\tests\addProductToCart.test.js:41:5
+
+# Error details
+
+```
+Error: page.waitForSelector: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('.minicart-items .product-itm') to be visible
+
+    at verifyProductInCart (C:\Playwright_Automation\tests\addProductToCart.test.js:37:33)
+    at C:\Playwright_Automation\tests\addProductToCart.test.js:45:5
+```
+
+# Test source
+
+```ts
+   1 | import {test, expect} from '@playwright/test';
+   2 |
+   3 | // Constants
+   4 | const SEARCH_TERM = 'bag';
+   5 | const SEARCH_INPUT_SELECTOR = '#search';
+   6 | const SEARCH_RESULTS_SELECTOR = '.product-item';
+   7 | const FIRST_PRODUCT_SELECTOR = "//img[@alt='Voyage Yoga Bag']";
+   8 | const ADD_TO_CART_BUTTON_SELECTOR = '#product-addtocart-button';
+   9 | const MINICART_WRAPPER_SELECTOR = '.minicart-wrapper';
+  10 | const MINICART_ITEM_SELECTOR = '.minicart-items .product-itm';
+  11 |
+  12 | // Function to navigate to the website
+  13 | async function navigateToWebsite(page) {
+  14 |     await page.goto('/');
+  15 | }
+  16 |
+  17 | // Function to perform a search
+  18 | // The 'page' parameter is the Playwright page object
+  19 | async function searchProduct(page, searchTerm) {
+  20 |     await page.fill(SEARCH_INPUT_SELECTOR, searchTerm);
+  21 |     await page.press(SEARCH_INPUT_SELECTOR, 'Enter');
+  22 |     await page.waitForSelector(SEARCH_RESULTS_SELECTOR);
+  23 | }
+  24 |
+  25 |
+  26 | // Function to add the first product to the cart
+  27 | async function addFirstProductToCart(page) {
+  28 |     const firstProduct = await page.$(FIRST_PRODUCT_SELECTOR);
+  29 |     await firstProduct.click();
+  30 |     await page.click(ADD_TO_CART_BUTTON_SELECTOR);
+  31 |     await page.waitForTimeout(3000);
+  32 | }
+  33 |
+  34 | // Function to verify the product is in the cart
+  35 | async function verifyProductInCart(page) {
+  36 |     await page.click(MINICART_WRAPPER_SELECTOR);
+> 37 |     const cartItem = await page.waitForSelector(MINICART_ITEM_SELECTOR);
+     |                                 ^ Error: page.waitForSelector: Test timeout of 30000ms exceeded.
+  38 |     expect(cartItem).not.toBeNull();
+  39 | }
+  40 |
+  41 | test('Search for a product and add to cart', async ({page}) => {
+  42 |     await navigateToWebsite(page);
+  43 |     await searchProduct(page, SEARCH_TERM);
+  44 |     await addFirstProductToCart(page);
+  45 |     await verifyProductInCart(page);
+  46 | });
+```
