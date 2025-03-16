@@ -29,8 +29,8 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://magento.softwaretestingboard.com/',
-    // headless: false,
-    headless: true,
+    headless: false,
+    // headless: true,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace:"off",
@@ -39,20 +39,20 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'Google Chrome',
-      use: { 
-        ...devices['Desktop Chrome'], 
-        channel: 'chrome' // Run tests in system-installed Chrome
-      },
-    },
-  
   // projects: [
   //   {
-  //     name: 'chromium',
-  //     use: { ...devices['Desktop Chrome'] },
+  //     name: 'Google Chrome',
+  //     use: { 
+  //       ...devices['Desktop Chrome'], 
+  //       channel: 'chrome' // Run tests in system-installed Chrome
+  //     },
   //   },
+  
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
 
     // {
     //   name: 'firefox',
