@@ -23,6 +23,7 @@ class ReviewPage{
         await this.page.fill(this.REVIEW_FORM.review,"This jacket is super cozy and warm. I love wearing it on cold days, especially when I'm outdoors. The material feels soft and it keeps me warm without being too bulky. The only downside is that the sleeves are a bit too long for me. Other than that, it’s a great purchase!")
         // await this.page.click(this.REVIEW_SUBMIT)
         await this.page.click(this.WISH_LIST)
+        await this.page.goBack() 
     }
 }
 module.exports=ReviewPage

@@ -21,7 +21,7 @@ const SEARCH_TERM = "bag";
 
 test.only("search for a product and add to cart", async function ({ page }) {
     const homePage = new HomePage(page);
-    // await page.pause();
+    await page.pause();
     const searchPage = new SearchPage(page);
     const productlistingpage = new ProductListingPage(page);
     const productdetailspage = new ProductDetailsPage(page);
@@ -58,9 +58,6 @@ test.only("search for a product and add to cart", async function ({ page }) {
     await scroll.scrollBy1000px()
     await review.reviewDetails()
     await review.fillreviewform()
-
-
-
 });
 test("create an account", async  function({page}) {
     const homePage = new HomePage(page);

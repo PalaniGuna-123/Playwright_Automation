@@ -1,0 +1,42 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: build automation Airbnb website >> click toggle button
+- Location: C:\Playwright_Automation\tests\airbnb.spec.js:10:9
+
+# Error details
+
+```
+Error: page.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('//*[name()=\'path\' and contains(@d,\'M2 16h28M2\')]')
+
+    at signUpPage.proceed_toggle (C:\Playwright_Automation\pages\signUp.js:12:25)
+    at C:\Playwright_Automation\tests\airbnb.spec.js:12:26
+```
+
+# Test source
+
+```ts
+   1 | const testValues=JSON.parse(JSON.stringify(require("../logindata.json")))
+   2 | class signUpPage{
+   3 |     constructor(page){
+   4 |         this.page=page;
+   5 |         this.CLICK_TOGGLE="//*[name()='path' and contains(@d,'M2 16h28M2')]"
+   6 |         this.SIGN_UP={
+   7 |             
+   8 |
+   9 |         }
+  10 |     }
+  11 |     async proceed_toggle(){
+> 12 |         await this.page.click(this.CLICK_TOGGLE)
+     |                         ^ Error: page.click: Test timeout of 30000ms exceeded.
+  13 |     }
+  14 | }
+  15 | module.exports=signUpPage
+```
