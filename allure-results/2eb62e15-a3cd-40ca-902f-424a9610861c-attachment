@@ -1,0 +1,66 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: automation testing in demoblaze >> open demoblaze web application
+- Location: C:\Playwright_Automation\tests\moodle.spec.js:7:9
+
+# Error details
+
+```
+Error: page.click: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('//a[@title=\'Flag this question for future reference\']')
+
+    at SeleniumPage.move_next (C:\Playwright_Automation\pages\selenium.js:35:25)
+    at C:\Playwright_Automation\tests\moodle.spec.js:17:9
+```
+
+# Test source
+
+```ts
+   1 | class SeleniumPage{
+   2 |     constructor(page){
+   3 |         this.page=page;
+   4 |         this.SELENIUM_LINK="//span[@aria-hidden='true'][normalize-space()='Selenium']"
+   5 |         this.OPEN_ASSESSMENT="//li[@id='module-1799']//a[contains(@class,'aalink stretched-link')]"
+   6 |         this.OPEN_REVIEW="//a[@title='Review your responses to this attempt']"
+   7 |         this.OPEN_ONEPAGE="//a[normalize-space()='Show one page at a time']"
+   8 |         this.NEXT_PAGE="//span[normalize-space()='Next page']"
+   9 |         this.PREVIOUS_PAGE="//span[normalize-space()='Previous page']"
+  10 |         this.FLAG="//a[@title='Flag this question for future reference']"
+  11 |         this.FINISH="//a[@class='mod_quiz-next-nav']"
+  12 |     }
+  13 |     async navigateSelenium(){
+  14 |         await this.page.click(this.SELENIUM_LINK)
+  15 |     }
+  16 |     async open_selenium_assessment(){
+  17 |        await this.page.click(this.OPEN_ASSESSMENT)
+  18 |     }
+  19 |     async open_review(){
+  20 |         await this.page.click(this.OPEN_REVIEW)
+  21 |     }
+  22 |     async open_onepage(){
+  23 |         await this.page.click(this.OPEN_ONEPAGE)
+  24 |     }
+  25 |     async move_next(){
+  26 |         for(let i=1;i<=14;i++){
+  27 |             await this.page.click(this.NEXT_PAGE)
+  28 |             await this.page.waitForTimeout(1000)
+  29 |         }
+  30 |         for(let i=1;i<=1;i++){
+  31 |             await this.page.click(this.PREVIOUS_PAGE)
+  32 |         }
+  33 |         await this.page.click(this.FLAG)
+  34 |         await this.page.waitForTimeout(2000)
+> 35 |         await this.page.click(this.FLAG)
+     |                         ^ Error: page.click: Target page, context or browser has been closed
+  36 |         await this.page.click(this.FINISH)
+  37 |     }
+  38 | }
+  39 | module.exports=SeleniumPage;
+```

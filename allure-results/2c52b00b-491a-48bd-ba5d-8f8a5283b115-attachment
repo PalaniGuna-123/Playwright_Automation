@@ -1,0 +1,36 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: automation testing in demoblaze >> open demoblaze web application
+- Location: C:\Playwright_Automation\tests\homeData.spec.js:5:9
+
+# Error details
+
+```
+Error: page.goto: Test ended.
+Call log:
+  - navigating to "https://blazedemo.com/", waiting until "load"
+
+    at demoHomePage.openDemoBlaze (C:\Playwright_Automation\pages\demoblazehome.js:6:19)
+    at C:\Playwright_Automation\tests\homeData.spec.js:7:24
+```
+
+# Test source
+
+```ts
+  1 | class demoHomePage{
+  2 |     constructor(page){
+  3 |         this.page=page;
+  4 |     }
+  5 |     async openDemoBlaze(){
+> 6 |         this.page.goto("https://blazedemo.com/")
+    |                   ^ Error: page.goto: Test ended.
+  7 |     }
+  8 | }
+  9 | module.exports=demoHomePage;
+```

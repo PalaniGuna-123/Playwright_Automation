@@ -1,0 +1,64 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: automation testing in demoblaze >> open demoblaze web application
+- Location: C:\Playwright_Automation\tests\moodle.spec.js:7:9
+
+# Error details
+
+```
+Error: page.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('//a[@id=\'yui_3_18_1_1_1742286865281_44\']')
+
+    at SeleniumPage.move_next (C:\Playwright_Automation\pages\selenium.js:31:29)
+    at C:\Playwright_Automation\tests\moodle.spec.js:17:9
+```
+
+# Test source
+
+```ts
+   1 | class SeleniumPage{
+   2 |     constructor(page){
+   3 |         this.page=page;
+   4 |         this.SELENIUM_LINK="//span[@aria-hidden='true'][normalize-space()='Selenium']"
+   5 |         this.OPEN_ASSESSMENT="//li[@id='module-1799']//a[contains(@class,'aalink stretched-link')]"
+   6 |         this.OPEN_REVIEW="//a[@title='Review your responses to this attempt']"
+   7 |         this.OPEN_ONEPAGE="//a[normalize-space()='Show one page at a time']"
+   8 |         this.NEXT_PAGE="//span[normalize-space()='Next page']"
+   9 |         this.PREVIOUS_PAGE="//span[normalize-space()='Previous page']"
+  10 |         this.FLAG="//a[@id='yui_3_18_1_1_1742286865281_44']"
+  11 |     }
+  12 |     async navigateSelenium(){
+  13 |         await this.page.click(this.SELENIUM_LINK)
+  14 |     }
+  15 |     async open_selenium_assessment(){
+  16 |        await this.page.click(this.OPEN_ASSESSMENT)
+  17 |     }
+  18 |     async open_review(){
+  19 |         await this.page.click(this.OPEN_REVIEW)
+  20 |     }
+  21 |     async open_onepage(){
+  22 |         await this.page.click(this.OPEN_ONEPAGE)
+  23 |     }
+  24 |     async move_next(){
+  25 |         for(let i=1;i<=14;i++){
+  26 |             await this.page.click(this.NEXT_PAGE)
+  27 |             await this.page.waitForTimeout(1000)
+  28 |         }
+  29 |         for(let i=1;i<=1;i++){
+  30 |             await this.page.click(this.PREVIOUS_PAGE)
+> 31 |             await this.page.click(this.FLAG)
+     |                             ^ Error: page.click: Test timeout of 30000ms exceeded.
+  32 |         }
+  33 |         await this.page.click(this.NEXT_PAGE)
+  34 |         await this.page.click()
+  35 |     }
+  36 | }
+  37 | module.exports=SeleniumPage;
+```
