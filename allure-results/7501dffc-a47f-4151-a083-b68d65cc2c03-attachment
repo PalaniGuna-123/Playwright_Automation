@@ -1,0 +1,78 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: handle Google login
+- Location: C:\Playwright_Automation\tests\management.spec.js:3:5
+
+# Error details
+
+```
+Error: page.waitForSelector: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('input[type=\'email\']') to be visible
+
+    at C:\Playwright_Automation\tests\management.spec.js:20:22
+```
+
+# Page snapshot
+
+```yaml
+- heading "Settings" [level=1]
+- search:
+  - textbox "Search settings"
+- navigation:
+  - tree "Settings categories":
+    - treeitem "Privacy, search, and services" [selected]
+    - treeitem "About Microsoft Edge"
+- separator
+- main "Settings":
+  - heading "Search and connected experiences" [level=2]
+  - paragraph: Microsoft Edge may use web services to improve your browsing experience. You can always choose to turn these off.
+  - group:
+    - text: Let Microsoft Edge help keep your tabs organized
+    - checkbox "Let Microsoft Edge help keep your tabs organized" [checked]
+    - paragraph: We'll offer suggestions on how to organize your tabs so that you can browse with ease
+    - text: Address bar and search
+    - button "Address bar and search"
+    - paragraph: Manage search suggestions and search engine used in the address bar
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | test("handle Google login", async ({ page, context }) => {
+   4 |     // Step 3: Open a new window and switch to it
+   5 |     await page.goto("edge://settings/profiles")
+   6 |
+   7 |     const [popupPage] = await Promise.all([
+   8 |         context.waitForEvent('page'),
+   9 |         page.evaluate(() => window.open('https://fssamanagement.netlify.app/', '_blank'))
+  10 |     ]);
+  11 |     console.log("Step 3: Switched to the new window.");
+  12 |
+  13 |     // Step 4: Click the "Login with Google" button
+  14 |     await popupPage.waitForSelector('#login');
+  15 |     await popupPage.click('#login');
+  16 |     console.log("Step 4: Clicked 'Login with Google' button.");
+  17 |
+  18 |     // Step 5: Handle Google login
+  19 |     const googlePage = await context.waitForEvent('page');
+> 20 |     await googlePage.waitForSelector("input[type='email']");
+     |                      ^ Error: page.waitForSelector: Target page, context or browser has been closed
+  21 |     await googlePage.fill("input[type='email']", "guna.palani@fssa.freshworks.com");
+  22 |     await googlePage.click("text=Next");
+  23 |     console.log("Step 5: Google login completed.");
+  24 |
+  25 |     // Switch back to the original new window
+  26 |     await popupPage.bringToFront();
+  27 |     await popupPage.waitForTimeout(5000);
+  28 | });
+  29 |
+```

@@ -1,0 +1,2 @@
+Step 3: Switched to the new window.
+Step 4: Clicked 'Login with Google' button.

@@ -1,0 +1,60 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: handle Google login
+- Location: C:\Playwright_Automation\tests\management.spec.js:3:5
+
+# Error details
+
+```
+Error: browserContext._wrapApiCall: Test ended.
+Browser logs:
+
+<launching> C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AutoExpandDetailsElement,AvoidUnnecessaryBeforeUnloadCheckSync,CertificateTransparencyComponentUpdater,DeferRendererTasksAfterInput,DestroyProfileOnBrowserClose,DialMediaRouteProvider,ExtensionManifestV2Disabled,GlobalMediaControls,HttpsUpgrades,ImprovedCookieControls,LazyFrameLoading,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --enable-automation --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --no-sandbox --user-data-dir=C:\Users\GUNAPA~1\AppData\Local\Temp\playwright_chromiumdev_profile-NVzAHc --remote-debugging-pipe --no-startup-window
+<launched> pid=21756
+[pid=21756][err] [21756:33004:0319/115020.504:ERROR:about_handler.cc(1516)] We are empty.
+[pid=21756][err] [21756:33004:0319/115030.323:ERROR:interface_endpoint_client.cc(725)] Message 7 rejected by interface blink.mojom.WidgetHost
+[pid=21756][err] [21756:33004:0319/115030.323:ERROR:interface_endpoint_client.cc(725)] Message 8 rejected by interface blink.mojom.WidgetHost
+[pid=21756][err] [21756:33004:0319/115030.323:ERROR:interface_endpoint_client.cc(725)] Message 2 rejected by interface blink.mojom.Widget
+[pid=21756][err] [21756:33004:0319/115041.367:ERROR:about_handler.cc(1516)] We are empty.
+[pid=21756][err] [21756:33004:0319/115054.135:ERROR:feature_processor_state.cc(46)] Processing error occured: model MsedgeOptimizationTargetUserTopicOnUrlProtobuf failed with CustomInputError, message: Error processing custom input with fill policy 11
+[pid=21756] <gracefully close start>
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+>  3 | test("handle Google login", async ({ page, context }) => {
+     |     ^ Error: browserContext._wrapApiCall: Test ended.
+   4 |     // Step 3: Open a new window and switch to it
+   5 |     const [popupPage] = await Promise.all([
+   6 |         context.waitForEvent('page'),
+   7 |         page.evaluate(() => window.open('https://fssamanagement.netlify.app/', '_blank'))
+   8 |     ]);
+   9 |     console.log("Step 3: Switched to the new window.");
+  10 |
+  11 |     // Step 4: Click the "Login with Google" button
+  12 |     await popupPage.waitForSelector('#login');
+  13 |     await popupPage.click('#login');
+  14 |     console.log("Step 4: Clicked 'Login with Google' button.");
+  15 |
+  16 |     // Step 5: Handle Google login
+  17 |     const googlePage = await context.waitForEvent('page');
+  18 |     await googlePage.waitForSelector("input[type='email']");
+  19 |     await googlePage.fill("input[type='email']", "guna.palani@fssa.freshworks.com");
+  20 |     await googlePage.click("text=Next");
+  21 |     console.log("Step 5: Google login completed.");
+  22 |
+  23 |     // Switch back to the original new window
+  24 |     await popupPage.bringToFront();
+  25 |     await popupPage.waitForTimeout(5000);
+  26 | });
+  27 |
+```

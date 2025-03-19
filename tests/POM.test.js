@@ -58,6 +58,7 @@ test.only("search for a product and add to cart", async function ({ page }) {
     await scroll.scrollBy1000px()
     await review.reviewDetails()
     await review.fillreviewform()
+    
 });
 test("create an account", async  function({page}) {
     const homePage = new HomePage(page);

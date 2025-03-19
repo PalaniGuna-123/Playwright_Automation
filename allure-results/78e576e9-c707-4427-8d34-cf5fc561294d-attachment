@@ -1,0 +1,99 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: search for a product and add to cart
+- Location: C:\Playwright_Automation\tests\POM.test.js:22:6
+
+# Error details
+
+```
+Error: page.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('role=menuitem[name=" Women"]')
+
+    at WomenPage.goToJacketsPage (C:\Playwright_Automation\Ecom-POM\navigateWomenProducts.js:9:25)
+    at C:\Playwright_Automation\tests\POM.test.js:49:25
+```
+
+# Page snapshot
+
+```yaml
+- paragraph: This is a demo store to test your test automaiton scripts. No orders will be fulfilled. If you are facing any issue, email us at hello@softwaretestingboard.com.
+- banner:
+  - link "Skip to Content"
+  - list:
+    - listitem
+    - listitem:
+      - button "Change ":
+        - button "Change "
+  - link "store logo"
+  - link " My Cart"
+  - text:  Search
+  - combobox " Search"
+  - button "Search" [disabled]:  Search
+  - list:
+    - listitem
+- tablist:
+  - tabpanel:
+    - navigation:
+      - menu:
+        - menuitem "What's New"
+        - menuitem " Women"
+        - menuitem " Men"
+        - menuitem " Gear"
+        - menuitem " Training"
+        - menuitem "Sale"
+- main:
+  - heading "Shopping Cart" [level=1]
+  - alert
+  - alert
+  - paragraph: You have no items in your shopping cart.
+  - paragraph:
+    - text: Click
+    - link "here"
+    - text: to continue shopping.
+- contentinfo:
+  - list:
+    - listitem:
+      - link "Notes"
+    - listitem:
+      - link "Practice API Testing using Magento 2"
+    - listitem:
+      - link "Write for us"
+    - listitem:
+      - link "Subscribe"
+  - list:
+    - listitem:
+      - link "Search Terms"
+    - listitem:
+      - link "Privacy and Cookie Policy"
+    - listitem:
+      - link "Advanced Search"
+- text: We know you have an assignment to complete. If this site is not functioning as expected, drop us an email. Copyright © 2013-present Magento, Inc. All rights reserved.
+```
+
+# Test source
+
+```ts
+   1 | class WomenPage {
+   2 |     constructor(page) {
+   3 |         this.page = page;
+   4 |         this.WOMEN_MENU_ITEM = 'role=menuitem[name=" Women"]', { timeout: 60000 };
+   5 |         this.JACKETS_LINK = 'role=link[name="Jackets"]', { timeout: 60000 };
+   6 |     }
+   7 |
+   8 |     async goToJacketsPage() {
+>  9 |         await this.page.click(this.WOMEN_MENU_ITEM);
+     |                         ^ Error: page.click: Test timeout of 30000ms exceeded.
+  10 |         await this.page.click(this.JACKETS_LINK);
+  11 |     }
+  12 | }
+  13 |
+  14 | module.exports = WomenPage;
+  15 |
+```

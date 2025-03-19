@@ -1,0 +1,199 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: search for a product and add to cart
+- Location: C:\Playwright_Automation\tests\POM.test.js:22:6
+
+# Error details
+
+```
+Error: page.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('//div[@aria-label=\'Next\']//div[@class=\'fotorama__arr__arr\']')
+
+    at CartPage.changeImageMultipleTimes (C:\Playwright_Automation\Ecom-POM\addCart.js:15:29)
+    at CartPage.addAllItemsToCart (C:\Playwright_Automation\Ecom-POM\addCart.js:49:20)
+    at C:\Playwright_Automation\tests\POM.test.js:55:5
+```
+
+# Page snapshot
+
+```yaml
+- paragraph: This is a demo store to test your test automaiton scripts. No orders will be fulfilled. If you are facing any issue, email us at hello@softwaretestingboard.com.
+- banner:
+  - link "Skip to Content"
+  - list:
+    - listitem
+    - listitem:
+      - link "Change ":
+        - button "Change "
+  - link "store logo"
+  - link " My Cart"
+  - text:  Search
+  - combobox " Search"
+  - button "Search":  Search
+  - list:
+    - listitem
+- navigation:
+  - list:
+    - listitem:
+      - link "What's New"
+    - listitem:
+      - link "Women"
+    - listitem:
+      - link "Men"
+    - listitem:
+      - link "Gear"
+    - listitem:
+      - link "Training"
+    - listitem:
+      - link "Sale"
+- main:
+  - alert
+  - alert
+  - heading "Ingrid Running Jacket" [level=1]
+  - text: "Rating:   90 % of 100"
+  - link "2 Reviews"
+  - link "Add Your Review"
+  - text: As low as $84.00 In stock
+  - strong: "SKU#:"
+  - text: WJ04 Qty
+  - spinbutton "Qty": "1"
+  - button "Add to Cart" [disabled]
+  - link " Add to Wish List"
+  - link " Add to Compare"
+  - link "Skip to the end of the images gallery"
+  - img "main product photo"
+  - link "Skip to the beginning of the images gallery"
+  - link "Details"
+  - paragraph: The Ingrid Running Jacket combines sleek design and high performance with slim, contoured fit and moisture-wicking fabric. It features a full-zip construction and a collared neck to keep the elements out and body heat in. • Slim fit. • Moisture-wicking fabric. • Two side pockets. • Zippered pocket at back waist. • Machine wash/dry. • Ivory specked full zip
+  - link "More Information"
+  - table "More Information":
+    - caption: More Information
+    - rowgroup:
+      - row "Style Jacket, Lightweight, Full Zip":
+        - rowheader "Style"
+        - cell "Jacket, Lightweight, Full Zip"
+      - row "Material Nylon, Polyester, CoolTech™":
+        - rowheader "Material"
+        - cell "Nylon, Polyester, CoolTech™"
+      - row "Pattern Solid":
+        - rowheader "Pattern"
+        - cell "Solid"
+      - row "Climate Cool, Spring, Windy, Wintry":
+        - rowheader "Climate"
+        - cell "Cool, Spring, Windy, Wintry"
+  - link "Reviews (2)"
+  - 'group "You''re reviewing: Ingrid Running Jacket"':
+    - text: "You're reviewing:"
+    - strong: Ingrid Running Jacket
+    - group "Your Rating*":
+      - text: Your Rating* Rating 
+      - radio "Rating  1 star"
+      - text:  1 star
+      - radio "Rating  2 stars"
+      - text:  2 stars
+      - radio "Rating  3 stars"
+      - text:  3 stars
+      - radio "Rating  4 stars"
+      - text:  4 stars
+      - radio "Rating  5 stars"
+      - text:  5 stars
+    - text: Nickname*
+    - textbox "Nickname*"
+    - text: Summary*
+    - textbox "Summary*"
+    - text: Review*
+    - textbox "Review*"
+  - button "Submit Review"
+  - heading "Related Products" [level=2]
+  - list
+- contentinfo:
+  - list:
+    - listitem:
+      - link "Notes"
+    - listitem:
+      - link "Practice API Testing using Magento 2"
+    - listitem:
+      - link "Write for us"
+    - listitem:
+      - link "Subscribe"
+  - list:
+    - listitem:
+      - link "Search Terms"
+    - listitem:
+      - link "Privacy and Cookie Policy"
+    - listitem:
+      - link "Advanced Search"
+- text: We know you have an assignment to complete. If this site is not functioning as expected, drop us an email. Copyright © 2013-present Magento, Inc. All rights reserved.
+```
+
+# Test source
+
+```ts
+   1 | class CartPage {
+   2 |     constructor(page) {
+   3 |         this.page = page;
+   4 |         this.ITEMS_XPATH = "//img[@alt='Ingrid Running Jacket']", { timeout: 60000 }; 
+   5 |         this.CHANGE_IMAGE = "//div[@aria-label='Next']//div[@class='fotorama__arr__arr']";
+   6 |         this.SIZE_XPATH_BASE = "//div[@id='option-label-size-143-item-";  
+   7 |         this.COLOR_XPATH_BASE = "//div[@id='option-label-color-93-item-";  
+   8 |         this.QUANTITY="//input[@id='qty']"
+   9 |         this.ADD_TO_COMPARE="//div[@class='product-addto-links']//span[contains(text(),'Add to Compare')]"
+  10 |         
+  11 |     }
+  12 |
+  13 |     async changeImageMultipleTimes(times = 4) {
+  14 |         for (let i = 0; i < times; i++) {
+> 15 |             await this.page.click(this.CHANGE_IMAGE);
+     |                             ^ Error: page.click: Test timeout of 30000ms exceeded.
+  16 |             console.log(`Changed image ${i + 1} times.`);
+  17 |             await this.page.waitForTimeout(1000);
+  18 |         }
+  19 |     }
+  20 |
+  21 |     async selectSize(sizeId) {
+  22 |         const sizeXPath = `${this.SIZE_XPATH_BASE}${sizeId}']`;  
+  23 |         await this.page.click(sizeXPath);
+  24 |         console.log(`Selected size with ID: ${sizeId}`);
+  25 |     }
+  26 |
+  27 |     async selectMultipleSizes() {
+  28 |         const sizes = [166, 167, 168, 169, 170];  
+  29 |         for (let sizeId of sizes) {
+  30 |             await this.selectSize(sizeId);  
+  31 |         }
+  32 |     }
+  33 |
+  34 |     async selectColor(colorId) {
+  35 |         const colorXPath = `${this.COLOR_XPATH_BASE}${colorId}']`;
+  36 |         await this.page.click(colorXPath);
+  37 |         console.log(`Selected color with ID: ${colorId}`);
+  38 |     }
+  39 |
+  40 |     async selectMultipleColors() {
+  41 |         const colors = [56, 58, 59];  
+  42 |         for (let colorId of colors) {
+  43 |             await this.selectColor(colorId);
+  44 |         }
+  45 |     }
+  46 |
+  47 |     async addAllItemsToCart() {
+  48 |         await this.page.click(this.ITEMS_XPATH);  
+  49 |         await this.changeImageMultipleTimes();  
+  50 |         await this.selectMultipleSizes();  
+  51 |         await this.selectMultipleColors();  
+  52 |         await this.page.fill(this.QUANTITY,'11')
+  53 |         await this.page.click(this.ADD_TO_COMPARE)
+  54 |
+  55 |     }
+  56 | }
+  57 |
+  58 | module.exports = CartPage;
+  59 |
+```
