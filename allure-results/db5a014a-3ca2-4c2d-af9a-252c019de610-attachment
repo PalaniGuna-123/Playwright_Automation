@@ -1,0 +1,38 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: search for a product and add to cart
+- Location: C:\Playwright_Automation\tests\POM.test.js:22:6
+
+# Error details
+
+```
+Error: page.goto: net::ERR_ABORTED; maybe frame was detached?
+Call log:
+  - navigating to "https://magento.softwaretestingboard.com/", waiting until "load"
+
+    at HomePage.navigatetoWeb (C:\Playwright_Automation\Ecom-POM\homepage.js:6:24)
+    at C:\Playwright_Automation\tests\POM.test.js:31:20
+```
+
+# Test source
+
+```ts
+   1 | class HomePage{
+   2 |     constructor(page){
+   3 |        this.page = page;
+   4 |     }
+   5 |     async navigatetoWeb(){
+>  6 |        await this.page.goto('/')
+     |                        ^ Error: page.goto: net::ERR_ABORTED; maybe frame was detached?
+   7 |        await this.page.setViewportSize({ width: 1700, height: 1080 });
+   8 |
+   9 |     }
+  10 |    }
+  11 |    module.exports=HomePage
+```

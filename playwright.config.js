@@ -31,7 +31,7 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://magento.softwaretestingboard.com/',
     // headless: false,
-    headless: true,
+    headless: false,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace:"on-first-retry",
