@@ -1,0 +1,86 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: test
+- Location: C:\Playwright_Automation\tests\cinemaUlagam.spec.js:3:5
+
+# Error details
+
+```
+Error: locator.click: Target page, context or browser has been closed
+Call log:
+  - waiting for getByRole('link', { name: 'Movies' })
+    - locator resolved to <a href="#movieList">Movies</a>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="signup-container show">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="signup-container show">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    42 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="signup-container show">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+    at C:\Playwright_Automation\tests\cinemaUlagam.spec.js:15:52
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | test('test', async ({ page }) => {
+   4 |   await page.goto('https://cinemaulagam.netlify.app/');
+   5 |   await page.pause()
+   6 |   await page.getByRole('button', { name: 'Login' }).click();
+   7 |   await page.getByRole('link', { name: 'Sign Up' }).click();
+   8 |   await page.getByRole('textbox', { name: 'Full Name' }).click();
+   9 |   await page.getByRole('textbox', { name: 'Full Name' }).fill('Guna');
+  10 |   await page.getByRole('textbox', { name: 'Email' }).click();
+  11 |   await page.getByRole('textbox', { name: 'Email' }).fill('gu7@gmail.com');
+  12 |   await page.getByRole('textbox', { name: 'Password' }).click();
+  13 |   await page.getByRole('textbox', { name: 'Password' }).fill('Guna@?2004');
+  14 |   await page.getByRole('button', { name: 'Sign Up' }).click();
+> 15 |   await page.getByRole('link', { name: 'Movies' }).click();
+     |                                                    ^ Error: locator.click: Target page, context or browser has been closed
+  16 |   await page.getByRole('heading', { name: 'Lucky Baskhar' }).click();
+  17 |   await page.getByText('Fri Mar 14').click();
+  18 |   await page.getByText('Sat Mar 15').click();
+  19 |   await page.getByText(':30 PM').click();
+  20 |   await page.getByText('A4').click();
+  21 |   await page.getByText('A3').click();
+  22 |   await page.getByText('A2').click();
+  23 |   await page.getByText('A1', { exact: true }).click();
+  24 |   await page.getByText('B1', { exact: true }).click();
+  25 |   await page.getByText('C1', { exact: true }).click();
+  26 |   await page.getByText('D1', { exact: true }).click();
+  27 |   await page.getByText('D2').click();
+  28 |   await page.getByText('D3').click();
+  29 |   await page.getByText('D4').click();
+  30 |   await page.getByText('C4').click();
+  31 |   await page.getByText('C5').click();
+  32 |   await page.getByText('C6').click();
+  33 |   await page.getByText('C7').click();
+  34 |   await page.getByText('D7').click();
+  35 |   await page.getByRole('button', { name: 'Pay Now :' }).click();
+  36 |   await page.getByText('Debit / Credit Card').click();
+  37 | });
+```

@@ -1,0 +1,66 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Cinema Booking Test
+- Location: C:\Playwright_Automation\tests\full.spec.js:9:5
+
+# Error details
+
+```
+Error: locator.click: Target page, context or browser has been closed
+Call log:
+  - waiting for getByText('Fri Mar 14')
+
+    at C:\Playwright_Automation\tests\full.spec.js:25:38
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | // Function to generate a random email
+   4 | function generateRandomEmail() {
+   5 |   const randomNum = Math.floor(Math.random() * 1000000); // Random 6-digit number
+   6 |   return `guna${randomNum}@gmail.com`;
+   7 | }
+   8 |
+   9 | test('Cinema Booking Test', async ({ page }) => {
+  10 |   const randomEmail = generateRandomEmail(); // Generate a new random email
+  11 |
+  12 |   await page.goto('https://cinemaulagam.netlify.app/');
+  13 |   await page.pause();
+  14 |   
+  15 |   await page.getByRole('button', { name: 'Login' }).click();
+  16 |   await page.getByRole('link', { name: 'Sign Up' }).click();
+  17 |   
+  18 |   await page.getByRole('textbox', { name: 'Full Name' }).fill('Guna');
+  19 |   await page.getByRole('textbox', { name: 'Email' }).fill(randomEmail); // Using Random Email
+  20 |   await page.getByRole('textbox', { name: 'Password' }).fill('Guna@?2004');
+  21 |   await page.getByRole('button', { name: 'Sign Up' }).click();
+  22 |   
+  23 |   await page.getByRole('link', { name: 'Movies' }).click();
+  24 |   await page.getByRole('heading', { name: 'Lucky Baskhar' }).click();
+> 25 |   await page.getByText('Fri Mar 14').click();
+     |                                      ^ Error: locator.click: Target page, context or browser has been closed
+  26 |   await page.getByText('Sat Mar 15').click();
+  27 |   await page.getByText(':30 PM').click();
+  28 |   
+  29 |   // Selecting seats
+  30 |   const seats = ['A4', 'A3', 'A2', 'A1', 'B1', 'C1', 'D1', 'D2', 'D3', 'D4', 'C4', 'C5', 'C6', 'C7', 'D7'];
+  31 |   for (const seat of seats) {
+  32 |     await page.getByText(seat, { exact: true }).click();
+  33 |   }
+  34 |   
+  35 |   await page.getByRole('button', { name: 'Pay Now :' }).click();
+  36 |   await page.getByText('Debit / Credit Card').click();
+  37 |   
+  38 |   console.log(`✅ Test completed with random email: ${randomEmail}`);
+  39 | });
+  40 |
+```

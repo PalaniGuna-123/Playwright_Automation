@@ -1,0 +1,138 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: test
+- Location: C:\Playwright_Automation\tests\cinema.spec.js:3:5
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for getByText('A4')
+    - locator resolved to <div class="seat booked">A4</div>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="seat-row">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="seat-row">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    - waiting for element to be visible, enabled and stable
+    - element is not stable
+  31 × retrying click action
+       - waiting 500ms
+       - waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="seat-row">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+    at C:\Playwright_Automation\tests\cinema.spec.js:16:30
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | test('test', async ({ page }) => {
+   4 |   await page.goto('https://cinemaulagam.netlify.app/');
+   5 |   await page.getByRole('button', { name: 'Login' }).click();
+   6 |   await page.getByRole('textbox', { name: 'Email' }).click();
+   7 |   await page.getByRole('textbox', { name: 'Email' }).fill('henry@gmail.com');
+   8 |   await page.getByRole('textbox', { name: 'Password' }).click();
+   9 |   await page.getByRole('textbox', { name: 'Password' }).fill('Guna@?2004');
+  10 |   await page.getByRole('textbox', { name: 'Password' }).press('Tab');
+  11 |   await page.getByRole('button', { name: 'Log In' }).click();
+  12 |   await page.getByRole('link', { name: 'Movies' }).click();
+  13 |   await page.getByRole('heading', { name: 'Lucky Baskhar' }).click();
+  14 |   await page.getByText('Thu Apr 03').click();
+  15 |   await page.getByText(':30 PM').click();
+> 16 |   await page.getByText('A4').click();
+     |                              ^ Error: locator.click: Test timeout of 30000ms exceeded.
+  17 |   await page.waitForTimeout(1000);
+  18 |   await page.getByText('A3').click();
+  19 |   await page.waitForTimeout(1000);
+  20 |   await page.getByText('A2').click();
+  21 |   await page.waitForTimeout(1000);
+  22 |   await page.getByText('A1', { exact: true }).click();
+  23 |   await page.waitForTimeout(1000);
+  24 |   await page.getByText('B1', { exact: true }).click();
+  25 |   await page.waitForTimeout(1000);
+  26 |   await page.getByText('C1', { exact: true }).click();
+  27 |   await page.waitForTimeout(1000);
+  28 |   await page.getByText('D1', { exact: true }).click();
+  29 |   await page.waitForTimeout(1000);
+  30 |   await page.getByText('E1', { exact: true }).click();
+  31 |   await page.waitForTimeout(1000);
+  32 |   await page.getByText('E2').click();
+  33 |   await page.waitForTimeout(1000);
+  34 |   await page.getByText('E3').click();
+  35 |   await page.waitForTimeout(1000);
+  36 |   await page.getByText('E4').click();
+  37 |   await page.waitForTimeout(1000);
+  38 |   await page.getByText('D4').click();
+  39 |   await page.waitForTimeout(1000);
+  40 |   await page.getByText('C4').click();
+  41 |   await page.waitForTimeout(1000);
+  42 |   await page.getByText('C5').click();
+  43 |   await page.waitForTimeout(1000);
+  44 |   await page.getByText('C6').click();
+  45 |   await page.waitForTimeout(1000);
+  46 |   await page.getByText('D6').click();
+  47 |   await page.waitForTimeout(1000);
+  48 |   await page.getByText('E6').click();
+  49 |   await page.waitForTimeout(1000);
+  50 |   await page.getByText('A7').click();
+  51 |   await page.waitForTimeout(1000);
+  52 |   await page.getByText('B8').click();
+  53 |   await page.waitForTimeout(1000);
+  54 |   await page.getByText('C9').click();
+  55 |   await page.waitForTimeout(1000);
+  56 |   await page.getByText('D10').click();
+  57 |   await page.waitForTimeout(1000);
+  58 |   await page.getByText('E11').click();
+  59 |   await page.waitForTimeout(1000);
+  60 |   await page.getByText('D12').click();
+  61 |   await page.waitForTimeout(1000);
+  62 |   await page.getByText('C1C2C3C4C5C6C7C8C9C10C11C12C13C14C15').click();
+  63 |   await page.waitForTimeout(1000);
+  64 |   await page.getByText('C13').click();
+  65 |   await page.waitForTimeout(1000);
+  66 |   await page.getByText('B14').click();
+  67 |   await page.waitForTimeout(1000);
+  68 |   await page.getByText('A15').click();
+  69 |   await page.waitForTimeout(1000);
+  70 |   await page.getByRole('button', { name: 'Pay Now :' }).click();
+  71 |   await page.getByText('Debit / Credit Card').click();
+  72 |   await page.getByRole('textbox', { name: 'Enter Your Card Number' }).click();
+  73 |   await page.getByRole('textbox', { name: 'Enter Your Card Number' }).fill('1234567890123467');
+  74 |   await page.getByRole('textbox', { name: 'Name on the card' }).click();
+  75 |   await page.getByRole('textbox', { name: 'Name on the card' }).fill('guna');
+  76 |   await page.getByRole('textbox', { name: 'MM' }).click();
+  77 |   await page.getByRole('textbox', { name: 'MM' }).fill('08');
+  78 |   await page.getByRole('textbox', { name: 'YY' }).click();
+  79 |   await page.getByRole('textbox', { name: 'YY' }).fill('28');
+  80 |   await page.getByRole('textbox', { name: 'CVV' }).click();
+  81 |   await page.getByRole('textbox', { name: 'CVV' }).fill('766');
+  82 |   await page.getByRole('button', { name: 'Pay Now' }).click();
+  83 |   await page.getByRole('button', { name: 'Download' }).click();
+  84 | });
+  85 |
+```

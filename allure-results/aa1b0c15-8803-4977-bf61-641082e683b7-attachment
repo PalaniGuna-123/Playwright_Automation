@@ -1,0 +1,127 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: automation testing in demoblaze >> open demoblaze web application
+- Location: C:\Playwright_Automation\tests\moodle.spec.js:7:9
+
+# Error details
+
+```
+Error: page.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('//a[@title=\'Flag this question for future reference\']')
+
+    at SeleniumPage.move_next (C:\Playwright_Automation\pages\selenium.js:35:25)
+    at C:\Playwright_Automation\tests\moodle.spec.js:17:9
+```
+
+# Page snapshot
+
+```yaml
+- status
+- link "Skip to main content"
+- navigation "Site navigation": FSSA
+- heading "Selenium" [level=1]
+- region "Content":
+  - main:
+    - heading "Question 14" [level=3]
+    - text: Correct Mark 2.00 out of 2.00
+    - button "Flagged" [pressed]: Remove flag
+    - heading "Question text" [level=4]
+    - paragraph: In Selenium Grid, what is the purpose of a "Hub" and a "Node"?
+    - group "Question 14 Answer":
+      - text: Question 14 Answer
+      - radio "a. Hub runs UI tests, while Nodes run backend tests" [disabled]
+      - text: a.
+      - paragraph: Hub runs UI tests, while Nodes run backend tests
+      - radio "b. Hub runs the test, while Nodes store test results" [disabled]
+      - text: b. Hub runs the test, while Nodes store test results
+      - radio "c. Hub is the main server that distributes test cases; Nodes are machines executing tests" [checked] [disabled]
+      - text: c.
+      - paragraph: Hub is the main server that distributes test cases; Nodes are machines executing tests
+      - img "Correct": 
+      - radio "d. Hub and Nodes perform the same function" [disabled]
+      - text: d. Hub and Nodes perform the same function
+    - heading "Feedback" [level=4]
+    - paragraph: Your answer is correct.
+    - text: "The correct answer is: Hub is the main server that distributes test cases; Nodes are machines executing tests"
+    - link "Previous page"
+    - link "Next page"
+- region "Blocks":
+  - complementary:
+    - heading "Blocks" [level=2]
+    - link "Skip Quiz navigation"
+    - navigation "Quiz navigation":
+      - heading "Quiz navigation" [level=3]
+      - link "Question 1"
+      - link "Question 2"
+      - link "Question 3"
+      - link "Question 4"
+      - link "Question 5"
+      - link "Question 6"
+      - link "Question 7"
+      - link "Question 8"
+      - link "Question 9"
+      - link "Question 10"
+      - link "Question 11"
+      - link "Question 12"
+      - link "Question 13"
+      - link "Question 14 This page Flagged"
+      - link "Question 15"
+      - link "Show all questions on one page"
+      - link "Finish review"
+- contentinfo
+```
+
+# Test source
+
+```ts
+   1 | class SeleniumPage{
+   2 |     constructor(page){
+   3 |         this.page=page;
+   4 |         this.SELENIUM_LINK="//span[@aria-hidden='true'][normalize-space()='Selenium']"
+   5 |         this.OPEN_ASSESSMENT="//li[@id='module-1799']//a[contains(@class,'aalink stretched-link')]"
+   6 |         this.OPEN_REVIEW="//a[@title='Review your responses to this attempt']"
+   7 |         this.OPEN_ONEPAGE="//a[normalize-space()='Show one page at a time']"
+   8 |         this.NEXT_PAGE="//span[normalize-space()='Next page']"
+   9 |         this.PREVIOUS_PAGE="//span[normalize-space()='Previous page']"
+  10 |         this.FLAG="//a[@title='Flag this question for future reference']"
+  11 |         this.UNFLAG="//a[normalize-space()='Remove flag']"
+  12 |         this.FINISH="//a[@class='mod_quiz-next-nav']"
+  13 |         this.BACK_TO_COURSE="//button[@id='single_button67d93837724754']"
+  14 |     }
+  15 |     async navigateSelenium(){
+  16 |         await this.page.click(this.SELENIUM_LINK)
+  17 |     }
+  18 |     async open_selenium_assessment(){
+  19 |        await this.page.click(this.OPEN_ASSESSMENT)
+  20 |     }
+  21 |     async open_review(){
+  22 |         await this.page.click(this.OPEN_REVIEW)
+  23 |     }
+  24 |     async open_onepage(){
+  25 |         await this.page.click(this.OPEN_ONEPAGE)
+  26 |     }
+  27 |     async move_next(){
+  28 |         for(let i=1;i<=14;i++){
+  29 |             await this.page.click(this.NEXT_PAGE)
+  30 |             await this.page.waitForTimeout(1000)
+  31 |         }
+  32 |         for(let i=1;i<=1;i++){
+  33 |             await this.page.click(this.PREVIOUS_PAGE)
+  34 |         }
+> 35 |         await this.page.click(this.FLAG)
+     |                         ^ Error: page.click: Test timeout of 30000ms exceeded.
+  36 |         await this.page.waitForTimeout(2000)
+  37 |         await this.page.click(this.UNFLAG)
+  38 |         await this.page.click(this.FINISH)
+  39 |         await this.page.click(this.BACK_TO_COURSE)
+  40 |     }
+  41 | }
+  42 | module.exports=SeleniumPage;
+```

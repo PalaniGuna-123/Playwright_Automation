@@ -1,0 +1,98 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: test
+- Location: C:\Playwright_Automation\tests\full.spec.js:3:5
+
+# Error details
+
+```
+Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at https://magento.softwaretestingboard.com/
+Call log:
+  - navigating to "https://magento.softwaretestingboard.com/", waiting until "load"
+
+    at C:\Playwright_Automation\tests\full.spec.js:4:14
+```
+
+# Page snapshot
+
+```yaml
+- heading "This page isn’t working" [level=1]
+- paragraph:
+  - strong: magento.softwaretestingboard.com
+  - text: is currently unable to handle this request.
+- text: HTTP ERROR 500
+- button "Reload"
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | test('test', async ({ page }) => {
+>  4 |   await page.goto('https://magento.softwaretestingboard.com/');
+     |              ^ Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at https://magento.softwaretestingboard.com/
+   5 |   await page.getByRole('combobox', { name: ' Search' }).click();
+   6 |   await page.getByRole('combobox', { name: ' Search' }).fill('bag');
+   7 |   await page.getByRole('combobox', { name: ' Search' }).press('Enter');
+   8 |   await page.getByRole('link', { name: 'Voyage Yoga Bag' }).first().click();
+   9 |   await page.getByRole('button', { name: 'Add to Cart' }).click();
+  10 |   await page.getByRole('menuitem', { name: ' Women' }).click();
+  11 |   await page.getByRole('link', { name: 'Hoodies & Sweatshirts' }).click();
+  12 |   await page.getByRole('listitem').filter({ hasText: 'Circe Hooded Ice Fleece As' }).getByLabel('XL').click();
+  13 |   await page.getByRole('listitem').filter({ hasText: 'Circe Hooded Ice Fleece As' }).getByLabel('Purple').click();
+  14 |   await page.getByRole('listitem').filter({ hasText: 'Circe Hooded Ice Fleece As' }).locator('button').click();
+  15 |   await page.getByRole('listitem').filter({ hasText: 'Eos V-Neck Hoodie As low as $' }).getByLabel('XL').click();
+  16 |   await page.getByRole('listitem').filter({ hasText: 'Eos V-Neck Hoodie As low as $' }).getByLabel('Orange').click();
+  17 |   await page.getByRole('listitem').filter({ hasText: 'Eos V-Neck Hoodie As low as $' }).locator('button').click();
+  18 |   await page.getByRole('listitem').filter({ hasText: 'Helena Hooded Fleece As low' }).getByLabel('XL').click();
+  19 |   await page.getByRole('option', { name: 'Yellow' }).click();
+  20 |   await page.getByRole('listitem').filter({ hasText: 'Helena Hooded Fleece As low' }).locator('button').click();
+  21 |   await page.getByRole('listitem').filter({ hasText: 'Ariel Roll Sleeve Sweatshirt' }).getByLabel('XL').click();
+  22 |   await page.getByRole('listitem').filter({ hasText: 'Ariel Roll Sleeve Sweatshirt' }).getByLabel('Red').click();
+  23 |   await page.getByRole('listitem').filter({ hasText: 'Ariel Roll Sleeve Sweatshirt' }).locator('button').click();
+  24 |   await page.getByRole('listitem').filter({ hasText: 'Cassia Funnel Sweatshirt As' }).getByLabel('XL').click();
+  25 |   await page.getByRole('listitem').filter({ hasText: 'Cassia Funnel Sweatshirt As' }).getByLabel('White').click();
+  26 |   await page.getByRole('listitem').filter({ hasText: 'Cassia Funnel Sweatshirt As' }).locator('button').click();
+  27 |   await page.getByRole('listitem').filter({ hasText: 'Phoebe Zipper Sweatshirt As' }).getByLabel('XL').click();
+  28 |   await page.getByRole('listitem').filter({ hasText: 'Phoebe Zipper Sweatshirt As' }).getByLabel('White').click();
+  29 |   await page.getByRole('listitem').filter({ hasText: 'Phoebe Zipper Sweatshirt As' }).locator('button').click();
+  30 |   await page.getByRole('listitem').filter({ hasText: 'Daphne Full-Zip Hoodie Rating' }).getByLabel('XL').click();
+  31 |   await page.getByRole('listitem').filter({ hasText: 'Daphne Full-Zip Hoodie Rating' }).getByLabel('Purple').click();
+  32 |   await page.getByRole('listitem').filter({ hasText: 'Daphne Full-Zip Hoodie Rating' }).locator('button').click();
+  33 |   await page.getByRole('listitem').filter({ hasText: 'Selene Yoga Hoodie Rating: 80' }).getByLabel('XL').click();
+  34 |   await page.getByRole('listitem').filter({ hasText: 'Selene Yoga Hoodie Rating: 80' }).getByLabel('White').click();
+  35 |   await page.getByRole('listitem').filter({ hasText: 'Selene Yoga Hoodie Rating: 80' }).locator('button').click();
+  36 |   await page.getByRole('listitem').filter({ hasText: 'Miko Pullover Hoodie Rating:' }).getByLabel('XL').click();
+  37 |   await page.getByRole('listitem').filter({ hasText: 'Miko Pullover Hoodie Rating:' }).getByLabel('Purple').click();
+  38 |   await page.getByRole('listitem').filter({ hasText: 'Miko Pullover Hoodie Rating:' }).locator('button').click();
+  39 |   await page.getByRole('listitem').filter({ hasText: 'Autumn Pullie Rating: 60% 3' }).getByLabel('XL').click();
+  40 |   await page.getByRole('listitem').filter({ hasText: 'Autumn Pullie Rating: 60% 3' }).getByLabel('Red').click();
+  41 |   await page.getByRole('listitem').filter({ hasText: 'Autumn Pullie Rating: 60% 3' }).locator('button').click();
+  42 |   await page.getByRole('listitem').filter({ hasText: 'Hera Pullover Hoodie Rating:' }).getByLabel('XL').click();
+  43 |   await page.getByRole('listitem').filter({ hasText: 'Hera Pullover Hoodie Rating:' }).getByLabel('Orange').click();
+  44 |   await page.getByRole('listitem').filter({ hasText: 'Hera Pullover Hoodie Rating:' }).locator('button').click();
+  45 |   await page.getByRole('listitem').filter({ hasText: 'Mona Pullover Hoodlie Rating' }).getByLabel('XL').click();
+  46 |   await page.getByRole('listitem').filter({ hasText: 'Mona Pullover Hoodlie Rating' }).getByLabel('Purple').click();
+  47 |   await page.getByRole('listitem').filter({ hasText: 'Mona Pullover Hoodlie Rating' }).locator('button').click();
+  48 |   await page.getByRole('link', { name: ' My Cart 13 13 items' }).click();
+  49 |   await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
+  50 |   await page.getByRole('tab', { name: 'of 13 Items in Cart ' }).click();
+  51 |   await page.getByRole('textbox', { name: 'Email Address * Email Address' }).click();
+  52 |   await page.getByRole('textbox', { name: 'Email Address * Email Address' }).fill('gunaguna20994@gmail.com');
+  53 |   await page.getByRole('textbox', { name: 'First Name *' }).click();
+  54 |   await page.getByRole('textbox', { name: 'Password' }).click();
+  55 |   await page.getByRole('textbox', { name: 'Password' }).fill('Guna@?2004');
+  56 |   await page.getByRole('button', { name: 'Login' }).click();
+  57 |   await page.goto('https://magento.softwaretestingboard.com/checkout/#shipping');
+  58 |   await page.getByRole('button', { name: 'Next' }).click();
+  59 |   await page.getByRole('button', { name: 'Place Order' }).click();
+  60 |   await page.getByRole('link', { name: 'Continue Shopping' }).click();
+  61 | });
+```

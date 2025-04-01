@@ -1,0 +1,40 @@
+All dropdown values AfghanistanÅland IslandsAlbaniaAlgeriaAmerican SamoaAndorraAngolaAnguillaAntarcticaAntigua and BarbudaArgentinaArmeniaArubaAustraliaAustriaAzerbaijanBahamasBahrainBangladeshBarbadosBelarusBelgiumBelizeBeninBermudaBhutanBolivia, Plurinational State ofBonaire, Sint Eustatius and SabaBosnia and HerzegovinaBotswanaBouvet IslandBrazilBritish Indian Ocean TerritoryBrunei DarussalamBulgariaBurkina FasoBurundiCambodiaCameroonCanadaCape VerdeCayman IslandsCentral African RepublicChadChileChinaChristmas IslandCocos (Keeling) IslandsColombiaComorosCongoCongo, the Democratic Republic of theCook IslandsCosta RicaCôte d’IvoireCroatiaCubaCuraçaoCyprusCzech RepublicDenmarkDjiboutiDominicaDominican RepublicEcuadorEgyptEl SalvadorEquatorial GuineaEritreaEstoniaEthiopiaFalkland Islands (Malvinas)Faroe IslandsFijiFinlandFranceFrench GuianaFrench PolynesiaFrench Southern TerritoriesGabonGambiaGeorgiaGermanyGhanaGibraltarGreeceGreenlandGrenadaGuadeloupeGuamGuatemalaGuernseyGuineaGuinea-BissauGuyanaHaitiHeard Island and McDonald IslandsHoly See (Vatican City State)HondurasHong KongHungaryIcelandIndiaIndonesiaIran, Islamic Republic ofIraqIrelandIsle of ManIsraelItalyJamaicaJapanJerseyJordanKazakhstanKenyaKiribatiKorea, Democratic People’s Republic ofKorea, Republic ofKuwaitKyrgyzstanLao People’s Democratic RepublicLatviaLebanonLesothoLiberiaLibyaLiechtensteinLithuaniaLuxembourgMacaoMacedonia, the former Yugoslav Republic ofMadagascarMalawiMalaysiaMaldivesMaliMaltaMarshall IslandsMartiniqueMauritaniaMauritiusMayotteMexicoMicronesia, Federated States ofMoldova, Republic ofMonacoMongoliaMontenegroMontserratMoroccoMozambiqueMyanmarNamibiaNauruNepalNetherlandsNew CaledoniaNew ZealandNicaraguaNigerNigeriaNiueNorfolk IslandNorthern Mariana IslandsNorwayOmanPakistanPalauPalestinian Territory, OccupiedPanamaPapua New GuineaParaguayPeruPhilippinesPitcairnPolandPortugalPuerto RicoQatarRéunionRomaniaRussian FederationRwandaSaint BarthélemySaint Helena, Ascension and Tristan da CunhaSaint Kitts and NevisSaint LuciaSaint Martin (French part)Saint Pierre and MiquelonSaint Vincent and the GrenadinesSamoaSan MarinoSao Tome and PrincipeSaudi ArabiaSenegalSerbiaSeychellesSierra LeoneSingaporeSint Maarten (Dutch part)SlovakiaSloveniaSolomon IslandsSomaliaSouth AfricaSouth Georgia and the South Sandwich IslandsSouth SudanSpainSri LankaSudanSurinameSvalbard and Jan MayenSwazilandSwedenSwitzerlandSyrian Arab RepublicTaiwan, Province of ChinaTajikistanTanzania, United Republic ofThailandTimor-LesteTogoTokelauTongaTrinidad and TobagoTunisiaTurkeyTurkmenistanTurks and Caicos IslandsTuvaluUgandaUkraineUnited Arab EmiratesUnited KingdomUnited StatesUnited States Minor Outlying IslandsUruguayUzbekistanVanuatuVenezuela, Bolivarian Republic ofViet NamVirgin Islands, BritishVirgin Islands, U.S.Wallis and FutunaWestern SaharaYemenZambiaZimbabwe
+value from dropdown using for loop  Afghanistan
+value from dropdown using for loop  Åland Islands
+value from dropdown using for loop  Albania
+value from dropdown using for loop  Algeria
+value from dropdown using for loop  American Samoa
+value from dropdown using for loop  Andorra
+value from dropdown using for loop  Angola
+value from dropdown using for loop  Anguilla
+value from dropdown using for loop  Antarctica
+value from dropdown using for loop  Antigua and Barbuda
+value from dropdown using for loop  Argentina
+value from dropdown using for loop  Armenia
+value from dropdown using for loop  Aruba
+value from dropdown using for loop  Australia
+value from dropdown using for loop  Austria
+value from dropdown using for loop  Azerbaijan
+value from dropdown using for loop  Bahamas
+value from dropdown using for loop  Bahrain
+value from dropdown using for loop  Bangladesh
+value from dropdown using for loop  Barbados
+value from dropdown using for loop  Belarus
+value from dropdown using for loop  Belgium
+value from dropdown using for loop  Belize
+value from dropdown using for loop  Benin
+value from dropdown using for loop  Bermuda
+value from dropdown using for loop  Bhutan
+value from dropdown using for loop  Bolivia, Plurinational State of
+value from dropdown using for loop  Bonaire, Sint Eustatius and Saba
+value from dropdown using for loop  Bosnia and Herzegovina
+value from dropdown using for loop  Botswana
+value from dropdown using for loop  Bouvet Island
+value from dropdown using for loop  Brazil
+value from dropdown using for loop  British Indian Ocean Territory
+value from dropdown using for loop  Brunei Darussalam
+value from dropdown using for loop  Bulgaria
+value from dropdown using for loop  Burkina Faso
+value from dropdown using for loop  Burundi
+value from dropdown using for loop  Cambodia
+value from dropdown using for loop  Cameroon

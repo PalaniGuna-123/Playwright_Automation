@@ -1,0 +1,44 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: open the homepage and check the title
+- Location: C:\Playwright_Automation\tests\homepage.test.js:3:1
+
+# Error details
+
+```
+Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at https://magento.softwaretestingboard.com/
+Call log:
+  - navigating to "https://magento.softwaretestingboard.com/", waiting until "load"
+
+    at C:\Playwright_Automation\tests\homepage.test.js:4:16
+```
+
+# Page snapshot
+
+```yaml
+- heading "This page isn’t working" [level=1]
+- paragraph:
+  - strong: magento.softwaretestingboard.com
+  - text: is currently unable to handle this request.
+- text: HTTP ERROR 500
+- button "Reload"
+```
+
+# Test source
+
+```ts
+  1 | const {test,expect}= require ("@playwright/test")
+  2 |
+  3 | test("open the homepage and check the title", async function({page}){
+> 4 |     await page.goto("/")
+    |                ^ Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at https://magento.softwaretestingboard.com/
+  5 |     await expect(page).toHaveTitle(/Home/)
+  6 |     
+  7 | })
+```
