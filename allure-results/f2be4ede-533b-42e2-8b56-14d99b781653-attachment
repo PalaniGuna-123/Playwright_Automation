@@ -1,0 +1,41 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Complete purchase flow
+- Location: C:\Playwright_Automation\tests\main.spec.js:14:1
+
+# Error details
+
+```
+Error: page.click: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('button.button.go-home')
+
+    at GoHome.goHome (C:\Playwright_Automation\LeatherLand_Pages\go_home.js:8:23)
+    at C:\Playwright_Automation\tests\main.spec.js:51:23
+```
+
+# Test source
+
+```ts
+   1 | class GoHome {
+   2 |     constructor(page) {
+   3 |       this.page = page;
+   4 |       this.GO_HOME = 'button.button.go-home';
+   5 |     }
+   6 |   
+   7 |     async goHome() {
+>  8 |       await this.page.click(this.GO_HOME);
+     |                       ^ Error: page.click: Target page, context or browser has been closed
+   9 |       console.log("Go to home");
+  10 |     }
+  11 |   }
+  12 |   
+  13 |   module.exports = GoHome;
+  14 |   
+```

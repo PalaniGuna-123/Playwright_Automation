@@ -6,9 +6,9 @@ class HomePage {
   
     async navigateToWeb(url = 'http://leatherland.netlify.app/') {
       await this.page.goto(url);
-    //   await this.page.setViewportSize({ width: 1280, height: 800 });
+      // await this.page.setViewportSize({ width: 1366, height: 768 });
       console.log(`Navigated to ${url} and set window size correctly.`);
     }
   }
   
-  module.exports = HomePage;
+module.exports = HomePage;

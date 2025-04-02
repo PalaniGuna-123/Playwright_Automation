@@ -1,0 +1,19 @@
+Navigated to http://leatherland.netlify.app/ and set window size correctly.
+Log in successfully
+Navigated to trending page
+Navigated to shoes page successfully
+Choose Filter option
+Filter option clicked successfully
+Product clicked successfully
+Image element not found
+Change size correctly
+Buy now button clicked successfully
+Add quantity successfully
+Scrolled down 1000px
+Edit Address button clicked successfully
+Shipping Form Filled Successfully
+Save Address button clicked
+Alert Message: Address updated successfully!
+Popup Alert Accepted Successfully
+Scrolled down 1000px
+Test completed successfully

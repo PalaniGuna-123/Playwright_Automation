@@ -1,0 +1,7 @@
+Navigated to http://leatherland.netlify.app/ and set window size correctly.
+Log in successfully
+Navigated to trending page
+Navigated to shoes page successfully
+Choose Filter option
+Filter option clicked successfully
+Product not found

@@ -1,0 +1,70 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Complete purchase flow
+- Location: C:\Playwright_Automation\tests\main.spec.js:14:1
+
+# Error details
+
+```
+Error: page.click: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('.ascending-order')
+    - locator resolved to <div class="ascending-order">Price Low to High</div>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    56 × waiting for element to be visible, enabled and stable
+       - element is not visible
+     - retrying click action
+       - waiting 500ms
+
+    at FilterPage.filterProduct (C:\Playwright_Automation\LeatherLand_Pages\filter.js:13:23)
+    at C:\Playwright_Automation\tests\main.spec.js:35:3
+```
+
+# Test source
+
+```ts
+   1 | class FilterPage {
+   2 |     constructor(page) {
+   3 |       this.page = page;
+   4 |       this.FILTER_OPTION = 'i.bx.bx-filter-alt.filter-icon';
+   5 |       this.FILTER = '.ascending-order';
+   6 |       this.CLICK_PRODUCT = 'a:has-text("School Shoes Girls 5yr Black")';
+   7 |     }
+   8 |   
+   9 |     async filterProduct() {
+  10 |       await this.page.click(this.FILTER_OPTION);
+  11 |       console.log("Choose Filter option");
+  12 |   
+> 13 |       await this.page.click(this.FILTER);
+     |                       ^ Error: page.click: Target page, context or browser has been closed
+  14 |       console.log("Filter option clicked successfully");
+  15 |     }
+  16 |   
+  17 |     async clickProduct() {
+  18 |       const product = await this.page.$(this.CLICK_PRODUCT);
+  19 |       if (product) {
+  20 |         await product.click();
+  21 |         console.log("Product clicked successfully");
+  22 |       } else {
+  23 |         console.log("Product not found");
+  24 |       }
+  25 |     }
+  26 |   }
+  27 |   
+  28 |   module.exports = FilterPage;
+  29 |   
+```

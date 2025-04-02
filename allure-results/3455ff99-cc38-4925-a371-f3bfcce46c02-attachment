@@ -1,0 +1,46 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Complete purchase flow
+- Location: C:\Playwright_Automation\tests\main.spec.js:14:1
+
+# Error details
+
+```
+Error: page.click: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('text=Trending')
+
+    at Trending.navigateTrending (C:\Playwright_Automation\LeatherLand_Pages\trending.js:9:23)
+    at C:\Playwright_Automation\tests\main.spec.js:32:23
+```
+
+# Test source
+
+```ts
+   1 | class Trending {
+   2 |     constructor(page) {
+   3 |       this.page = page;
+   4 |       this.TRENDING = 'text=Trending';
+   5 |       this.NAVIGATE_SHOES = 'text=View all';
+   6 |     }
+   7 |   
+   8 |     async navigateTrending() {
+>  9 |       await this.page.click(this.TRENDING);
+     |                       ^ Error: page.click: Target page, context or browser has been closed
+  10 |       console.log("Navigated to trending page");
+  11 |     }
+  12 |   
+  13 |     async navigateShoes() {
+  14 |       await this.page.click(this.NAVIGATE_SHOES);
+  15 |       console.log("Navigated to shoes page successfully");
+  16 |     }
+  17 |   }
+  18 |   
+  19 |   module.exports = Trending;
+```

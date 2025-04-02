@@ -1,0 +1,55 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Complete purchase flow
+- Location: C:\Playwright_Automation\tests\main.spec.js:14:1
+
+# Error details
+
+```
+Error: page.click: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('button.size-btn')
+
+    at ProductDetails.changeSize (C:\Playwright_Automation\LeatherLand_Pages\productDetails.js:20:23)
+    at C:\Playwright_Automation\tests\main.spec.js:39:15
+```
+
+# Test source
+
+```ts
+   1 | class ProductDetails {
+   2 |     constructor(page) {
+   3 |       this.page = page;
+   4 |       this.CHANGE_IMAGE = 'img.thumbnail.active';
+   5 |       this.CHANGE_SIZE = 'button.size-btn';
+   6 |       this.CLICK_BUY_NOW = 'button.btn.buy-now';
+   7 |     }
+   8 |   
+   9 |     async changeImgOne() {
+  10 |       const imgElement = await this.page.$(this.CHANGE_IMAGE);
+  11 |       if (imgElement) {
+  12 |         await imgElement.click();
+  13 |         console.log("Image 1 changed successfully");
+  14 |       } else {
+  15 |         console.log("Image element not found");
+  16 |       }
+  17 |     }
+  18 |   
+  19 |     async changeSize() {
+> 20 |       await this.page.click(this.CHANGE_SIZE);
+     |                       ^ Error: page.click: Target page, context or browser has been closed
+  21 |       console.log("Change size correctly");
+  22 |       await this.page.click(this.CLICK_BUY_NOW);
+  23 |       console.log("Buy now button clicked successfully");
+  24 |     }
+  25 |   }
+  26 |   
+  27 |   module.exports = ProductDetails;
+  28 |   
+```

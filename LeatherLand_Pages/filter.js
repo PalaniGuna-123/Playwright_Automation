@@ -1,29 +1,28 @@
+const { expect } = require('@playwright/test');
+
 class FilterPage {
-    constructor(page) {
-      this.page = page;
-      this.FILTER_OPTION = 'i.bx.bx-filter-alt.filter-icon';
-      this.FILTER = '.ascending-order';
-      this.CLICK_PRODUCT = 'a:has-text("School Shoes Girls 5yr Black")';
-    }
-  
-    async filterProduct() {
-      await this.page.click(this.FILTER_OPTION);
-      console.log("Choose Filter option");
-  
-      await this.page.click(this.FILTER);
-      console.log("Filter option clicked successfully");
-    }
-  
-    async clickProduct() {
-      const product = await this.page.$(this.CLICK_PRODUCT);
-      if (product) {
-        await product.click();
-        console.log("Product clicked successfully");
-      } else {
-        console.log("Product not found");
-      }
-    }
+  constructor(page) {
+    this.page = page;
+    this.FILTER_OPTION = this.page.locator('i.bx.bx-filter-alt.filter-icon');
+    this.FILTER = this.page.locator('.ascending-order');
+    this.CLICK_PRODUCT = this.page.locator("//img[@alt='fXtRkbYakgG5EFzgcgXY']");
   }
-  
-  module.exports = FilterPage;
-  
+
+  async filterProduct() {
+    await expect(this.FILTER_OPTION).toBeVisible();
+    await this.FILTER_OPTION.click();
+    console.log("Choose Filter option");
+
+    await expect(this.FILTER).toBeVisible();
+    await this.FILTER.click();
+    console.log("Filter option clicked successfully");
+  }
+
+  async clickProduct() {
+    await expect(this.CLICK_PRODUCT).toBeVisible();
+    await this.CLICK_PRODUCT.click();
+    console.log("Product clicked successfully");
+  }
+}
+
+module.exports = FilterPage;

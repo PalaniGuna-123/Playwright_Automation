@@ -1,0 +1,89 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Complete purchase flow
+- Location: C:\Playwright_Automation\tests\main.spec.js:14:1
+
+# Error details
+
+```
+Error: Timed out 5000ms waiting for expect(locator).toHaveURL(expected)
+
+Locator: locator(':root')
+Expected string: "http://leatherland.netlify.app/"
+Received string: "https://leatherland.netlify.app/pages/order-status.html?orderId=EVKxVVX5rljrVG6xdkI1K"
+Call log:
+  - expect.toHaveURL with timeout 5000ms
+  - waiting for locator(':root')
+    9 × locator resolved to <html lang="en">…</html>
+      - unexpected value "https://leatherland.netlify.app/pages/order-status.html?orderId=EVKxVVX5rljrVG6xdkI1K"
+
+    at C:\Playwright_Automation\tests\main.spec.js:53:22
+```
+
+# Test source
+
+```ts
+   1 | const { chromium, test, expect } = require('@playwright/test');
+   2 | const homePage = require('../LeatherLand_Pages/home');
+   3 | const LogInPage = require('../LeatherLand_Pages/logIn');
+   4 | const Trending = require('../LeatherLand_Pages/trending');
+   5 | const FilterPage = require('../LeatherLand_Pages/filter');
+   6 | const ProductDetails = require('../LeatherLand_Pages/productDetails');
+   7 | const OrderCheckOutPage = require('../LeatherLand_Pages/check_Out_Page');
+   8 | const ScrollControl = require('../LeatherLand_Pages/scrollControll');
+   9 | const cashOnDelivery = require('../LeatherLand_Pages/cash_On_Delivery');
+  10 | const ConfirmOrder = require('../LeatherLand_Pages/confirm_order');
+  11 | const GoHome = require('../LeatherLand_Pages/go_home');
+  12 | const CardDetails = require('../LeatherLand_Pages/card_details');
+  13 |
+  14 | test('Complete purchase flow', async ({ page }) => {
+  15 |   const Land_Home_Page = new homePage(page);
+  16 |   const Login_Page = new LogInPage(page);
+  17 |   const Trending_Page = new Trending(page);
+  18 |   const filterPage = new FilterPage(page);
+  19 |   const stock = new ProductDetails(page);
+  20 |   const order = new OrderCheckOutPage(page);
+  21 |   const scroll = new ScrollControl(page);
+  22 |   const cash_method = new cashOnDelivery(page);
+  23 |   const order_confirm = new ConfirmOrder(page);
+  24 |   const Go_to_My_Home = new GoHome(page);
+  25 |   const card_details = new CardDetails(page);
+  26 |
+  27 |   await Land_Home_Page.navigateToWeb();
+  28 |   // page.pause()
+  29 |   await Login_Page.goToLogInPage();
+  30 |   await Login_Page.fillLogInPage();
+  31 |
+  32 |   await Trending_Page.navigateTrending();
+  33 |   await Trending_Page.navigateShoes();
+  34 |
+  35 |   await filterPage.filterProduct();
+  36 |   await filterPage.clickProduct();
+  37 |
+  38 |   await stock.changeImgOne();
+  39 |   await stock.changeSize();
+  40 |
+  41 |   await order.addQuantity();
+  42 |   await scroll.scrollBy1000px();
+  43 |   await order.editAddress();
+  44 |   await order.fillAddressForm();
+  45 |   await order.clickSaveAddress();
+  46 |
+  47 |   await card_details.clickCard();
+  48 |   await card_details.fillCardDetails();
+  49 |   await scroll.scrollBy1000px();
+  50 |   await card_details.proceedToPay();
+  51 |   // await Go_to_My_Home.goHome();
+  52 |
+> 53 |   await expect(page).toHaveURL('http://leatherland.netlify.app/');
+     |                      ^ Error: Timed out 5000ms waiting for expect(locator).toHaveURL(expected)
+  54 |   console.log('Test completed successfully');
+  55 | });
+  56 |
+```
